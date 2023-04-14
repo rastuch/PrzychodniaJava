@@ -1,4 +1,4 @@
-package com.example.przychodnia.dao;
+package com.example.przychodnia;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

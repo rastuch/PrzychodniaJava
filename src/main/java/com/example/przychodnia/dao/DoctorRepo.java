@@ -1,4 +1,4 @@
-package com.example.przychodnia;
+package com.example.przychodnia.dao;
 
 import com.example.przychodnia.dao.entity.Doctor;
 import org.springframework.data.repository.CrudRepository;

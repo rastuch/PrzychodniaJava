@@ -1,5 +1,8 @@
-package com.example.przychodnia;
+package com.example.przychodnia.api;
 
+import com.example.przychodnia.dao.entity.Doctor;
+import com.example.przychodnia.manager.DoctorManager;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
@@ -9,48 +12,36 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/doctors")
 public class DoctorApi {
-    private List<Doctor> doctorList;
 
-    public DoctorApi(){
-        doctorList = new ArrayList<>();
-        doctorList.add(new Doctor.Builder()
-                .id(1L)
-                .firstName("Adam")
-                .secondName("Kowalski")
-                .build()
-        );
-        doctorList.add(new Doctor.Builder()
-                .id(2L)
-                .firstName("Karol")
-                .secondName("Adamowicz")
-                .build()
-        );
+    private DoctorManager doctors;
+
+    @Autowired
+    public DoctorApi(DoctorManager doctors){
+        this.doctors = doctors;
     }
 
     @GetMapping("/all")
-    public List<Doctor> getAll(){
-        return doctorList;
+    public Iterable<Doctor> getAll(){
+        return doctors.findAll();
     }
 
     @GetMapping("/id")
-    public Doctor getById(@RequestParam long index){
-        Optional<Doctor> first =  doctorList.stream()
-                .filter(element -> element.getId() == index).findFirst();
-        return first.get();
+    public Optional<Doctor> getById(@RequestParam long index){
+       return doctors.findById(index);
     }
 
     @PostMapping
-    public boolean addDoctor(@RequestBody Doctor doctor){
-        return doctorList.add(doctor);
+    public Doctor addDoctor(@RequestBody Doctor doctor){
+        return doctors.save(doctor);
     }
 
     @PutMapping
-    public boolean updateDoctor(@RequestBody Doctor doctor){
-        return doctorList.add(doctor);
+    public Doctor updateDoctor(@RequestBody Doctor doctor){
+        return doctors.save(doctor);
     }
 
     @DeleteMapping
-    public boolean updateDoctor(@RequestParam long index){
-        return doctorList.removeIf(element -> element.getId() == index);
+    public void deleteDoctor(@RequestParam long index){
+        doctors.delete(index);
     }
 }

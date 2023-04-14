@@ -1,4 +1,4 @@
-package com.example.przychodnia;
+package com.example.przychodnia.dao.entity;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
