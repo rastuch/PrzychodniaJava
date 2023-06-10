@@ -5,8 +5,7 @@ import com.example.przychodnia.manager.DoctorManager;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.ArrayList;
-import java.util.List;
+
 import java.util.Optional;
 
 @RestController
@@ -20,7 +19,7 @@ public class DoctorApi {
         this.doctors = doctors;
     }
 
-    @GetMapping("/all")
+    @GetMapping( "/all")
     public Iterable<Doctor> getAll(){
         return doctors.findAll();
     }

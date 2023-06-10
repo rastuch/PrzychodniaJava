@@ -1,14 +1,12 @@
 package com.example.przychodnia.dao.entity;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Doctor {
-
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     private long id;
@@ -23,6 +21,11 @@ public class Doctor {
     private String address;
     private String nfz;
     private String phoneNumber;
+
+    @OneToMany(mappedBy = "doctorId")
+    private List<Visit> visits;
+
+
 
     public Doctor(long id, String firstName, String secondName, LocalDate birthDate, String specialization, long pesel, long pwzNumber, String title, String email, String address, String nfz, String phoneNumber) {
         this.id = id;
